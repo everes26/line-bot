@@ -1,0 +1,10 @@
+channel:
+  secret: 307d21c2ac1920e7645879a298f1371d
+  access:
+    token: IdyAYi+YnTDRswoOaon7d9QjIeDFvXA0r7IxMtDXmr1afezZLfsdxRgZ/eCeoPBNc/1igX3RdBBERlYumYexYWSO6LeiTgDzVLbdgoCsY/rm5aCLvp40euAbuP2z/1myhSvQ/SzZMGBQ8hPhG4lGQwdB04t89/1O/w1cDnyilFU=
+
+url:
+  line:
+    message:
+      push: https://api.line.me/v2/bot/message/push
+      reply: https://api.line.me/v2/bot/message/reply
