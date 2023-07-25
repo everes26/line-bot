@@ -2,6 +2,7 @@ package com.example.linebot.controller;
 
 import com.example.linebot.model.Event;
 import com.example.linebot.model.Message;
+import com.example.linebot.model.Profile;
 import com.example.linebot.model.ReplyMessage;
 import com.example.linebot.model.WebhookEvent;
 import com.example.linebot.service.LineBotService;
@@ -36,13 +37,34 @@ public class HandlerLineBotController {
             events.forEach( event -> {
                 log.info("Event: " + event);
                 if (WEBHOOK_EVENT_TYPE_FOLLOW.equals(event.getType())) {
-                    ReplyMessage replyMessage = ReplyMessage.builder()
-                            .replyToken(event.getReplyToken())
-                            .messages(Collections.singletonList(Message.builder()
-                                    .type("text")
-                                    .text("Cảm ơn bạn đã follow tôi!")
-                                    .build())).build();
+
+
                     try {
+                        Profile profile = lineBotService.getProfile(event.getSource().getUserId());
+                        Message message1 = Message.builder()
+                                .type("text")
+                                .text("Tin nhắn này được gửi khi bạn follow chúng tôi!!!")
+                                .build();
+                        Message message2 = Message.builder()
+                                .type("text")
+                                .text(String.format("Cảm ơn %s đã follow chúng tôi!!!", profile.getDisplayName()))
+                                .build();
+                        Message message3 = Message.builder()
+                                .type("text")
+                                .text("Chúng tôi đã lấy được thông tin của bạn:")
+                                .build();
+                        Message message4 = Message.builder()
+                                .type("text")
+                                .text(String.format("Tên bạn là: %s \nNgôn ngữ: %s \nTrạng thái: %s \nUrl ảnh đại diện: %s",
+                                        profile.getDisplayName(), profile.getLanguage(), profile.getStatusMessage(), profile.getPictureUrl()))
+                                .build();
+                        Message message5 = Message.builder()
+                                .type("text")
+                                .text(String.format("Chúc % một ngày tốt lành!!!", profile.getDisplayName()))
+                                .build();
+                        ReplyMessage replyMessage = ReplyMessage.builder()
+                                .replyToken(event.getReplyToken())
+                                .messages(List.of(message1, message2, message3, message4)).build();
                         lineBotService.sendReplyMessage(replyMessage);
                     } catch (JsonProcessingException e) {
                         throw new RuntimeException(e);

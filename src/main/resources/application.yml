@@ -8,3 +8,5 @@ url:
     message:
       push: https://api.line.me/v2/bot/message/push
       reply: https://api.line.me/v2/bot/message/reply
+    user:
+      profile: https://api.line.me/v2/bot/profile/%s
