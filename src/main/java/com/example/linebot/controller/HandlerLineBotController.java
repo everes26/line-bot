@@ -60,11 +60,11 @@ public class HandlerLineBotController {
                                 .build();
                         Message message5 = Message.builder()
                                 .type("text")
-                                .text(String.format("Chúc % một ngày tốt lành!!!", profile.getDisplayName()))
+                                .text(String.format("Chúc %s một ngày tốt lành!!!", profile.getDisplayName()))
                                 .build();
                         ReplyMessage replyMessage = ReplyMessage.builder()
                                 .replyToken(event.getReplyToken())
-                                .messages(List.of(message1, message2, message3, message4)).build();
+                                .messages(List.of(message1, message2, message3, message4, message5)).build();
                         lineBotService.sendReplyMessage(replyMessage);
                     } catch (JsonProcessingException e) {
                         throw new RuntimeException(e);
